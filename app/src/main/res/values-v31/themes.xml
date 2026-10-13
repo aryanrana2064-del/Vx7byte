@@ -1,0 +1,8 @@
+<resources>
+    <style name="Theme.VX7" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/vx7_navy</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowSplashScreenBackground">@color/vx7_navy</item>
+    </style>
+</resources>

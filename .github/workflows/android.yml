@@ -24,6 +24,20 @@ jobs:
         with:
           gradle-version: '8.9'
 
+      # Safety net: delete leftover files from the old project (e.g. Ui2.kt) that cause "Conflicting overloads".
+      - name: Remove stale old-project files
+        shell: bash
+        run: |
+          for d in app/src/main/java/com/vx7/marketing app/src/test/java/com/vx7/marketing; do
+            [ -d "$d" ] || continue
+            for f in "$d"/*.kt; do
+              case "$(basename "$f")" in
+                Backup.kt|Data.kt|Exporter.kt|MainActivity.kt|Notify.kt|Repo.kt|Ui.kt|UiCollections.kt|UiLists.kt|UiMisc.kt|UiProducts.kt|Util.kt|Vm.kt|BackupTest.kt|UtilTest.kt) ;;
+                *) echo "Removing stale file: $f"; rm -f "$f" ;;
+              esac
+            done
+          done
+
       - name: Unit tests and debug APK
         shell: bash
         run: |
